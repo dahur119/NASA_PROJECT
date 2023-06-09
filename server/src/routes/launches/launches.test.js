@@ -4,7 +4,7 @@ const app = require("../../app");
 describe("Test Get /launches", () => {
   test("oit should respond with 200 success", async () => {
     const response = await request(app)
-      .get("/launches")
+      .get("/v1/launches")
       .expect("Content-Type", /json/)
       .expect(200);
     // expect(response.statusCode).toBe(200);
@@ -26,7 +26,7 @@ describe("Test POST /launch", () => {
 
   test("it should respond with 200 success", async () => {
     const response = await request(app)
-      .post("/launches")
+      .post("/v1/launches")
       .send(completerLaunchData)
       .expect("Content-Type", /json/)
       .expect(201);
@@ -47,7 +47,7 @@ describe("Test POST /launch", () => {
     };
 
     const response = await request(app)
-      .post("/launches")
+      .post("/v1/launches")
       .send(invalidLaunchData)
       .expect("Content-Type", /json/)
       .expect(400);
@@ -68,7 +68,7 @@ test("it should catch invalid dates", async () => {
   };
 
   const response = await request(app)
-    .post("/launches")
+    .post("/v1/launches")
     .send(launchDataWithInvalidData)
     .expect("Content-Type", /json/)
     .expect(400);

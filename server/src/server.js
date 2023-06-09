@@ -1,13 +1,15 @@
 const http = require("http");
+require("dotenv").config();
+
 const app = require("./app");
 const mongoose = require("mongoose");
 
 const { loadPlanetsData } = require("./model/planet.model");
+const { loadLaunchData } = require("./model/lunches.model");
 
 const PORT = process.env.PORT || 8000;
 
-const MONGO_URL =
-  "mongodb+srv://nasa-api:jSuc3FbyqoH1VOlb@nasa-project.xt27qar.mongodb.net/";
+const MONGO_URL = process.env.MONGO_URL;
 
 const server = http.createServer(app);
 
@@ -26,6 +28,7 @@ async function startServer() {
   });
 
   await loadPlanetsData();
+  await loadLaunchData();
 
   server.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`);
